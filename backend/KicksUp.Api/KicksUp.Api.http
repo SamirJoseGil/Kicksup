@@ -1,0 +1,6 @@
+@KicksUp.Api_HostAddress = http://localhost:5047
+
+GET {{KicksUp.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
