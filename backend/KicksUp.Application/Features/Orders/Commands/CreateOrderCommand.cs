@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace KicksUp.Application.Features.Orders.Commands;
 
+// Comando para crear una nueva orden de compra
 public class CreateOrderCommand : IRequest<Result<OrderDto>>
 {
     public Guid UserId { get; set; }
@@ -14,12 +15,14 @@ public class CreateOrderCommand : IRequest<Result<OrderDto>>
     public List<OrderItemRequest> Items { get; set; } = new();
 }
 
+// Detalles de un ítem en la orden
 public class OrderItemRequest
 {
     public Guid ProductId { get; set; }
     public int Quantity { get; set; }
 }
 
+// Manejador del comando para crear una orden
 public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, Result<OrderDto>>
 {
     private readonly IApplicationDbContext _context;
@@ -31,7 +34,7 @@ public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, Res
 
     public async Task<Result<OrderDto>> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
     {
-        // Validate user exists
+        // Validar que el usuario exista
         var user = await _context.Users
             .FirstOrDefaultAsync(u => u.Id == request.UserId, cancellationToken);
 
@@ -45,7 +48,7 @@ public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, Res
             return Result<OrderDto>.Failure("La orden debe tener al menos un producto");
         }
 
-        // Validate products and stock
+        // Validar productos y stock
         var productIds = request.Items.Select(i => i.ProductId).ToList();
         var products = await _context.Products
             .Where(p => productIds.Contains(p.Id))
@@ -79,11 +82,11 @@ public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, Res
                 Subtotal = subtotal
             });
 
-            // Update stock
+            // Actualizar stock
             product.Stock -= item.Quantity;
         }
 
-        // Create order
+        // Crear orden
         var order = new Order
         {
             UserId = request.UserId,
@@ -96,7 +99,7 @@ public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, Res
         _context.Orders.Add(order);
         await _context.SaveChangesAsync(cancellationToken);
 
-        // Load full order with relationships
+        // Cargar la orden completa con relaciones
         var createdOrder = await _context.Orders
             .Include(o => o.User)
             .Include(o => o.OrderItems)

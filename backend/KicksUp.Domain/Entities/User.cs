@@ -3,6 +3,8 @@ using KicksUp.Domain.Enums;
 
 namespace KicksUp.Domain.Entities;
 
+
+// Entidad que representa un usuario del sistema
 public class User : BaseEntity
 {
     public string FirstName { get; set; } = string.Empty;
@@ -19,6 +21,6 @@ public class User : BaseEntity
     public string PasswordHash { get; set; } = string.Empty;
     public UserRole Role { get; set; } = UserRole.Client;
     
-    // Navigation properties
+    // Propiedades de navegación
     public ICollection<Order> Orders { get; set; } = new List<Order>();
 }

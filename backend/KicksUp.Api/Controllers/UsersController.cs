@@ -8,6 +8,7 @@ using System.Security.Claims;
 
 namespace KicksUp.Api.Controllers;
 
+// Controlador para gestión de usuarios
 [Authorize]
 [ApiController]
 [Route("api/[controller]")]
@@ -20,6 +21,7 @@ public class UsersController : ControllerBase
         _mediator = mediator;
     }
 
+    // Obtiene el perfil del usuario autenticado
     [HttpGet("profile")]
     public async Task<IActionResult> GetProfile()
     {
@@ -41,6 +43,7 @@ public class UsersController : ControllerBase
         return Ok(result.Data);
     }
 
+    // Actualiza el perfil del usuario autenticado
     [HttpPut("profile")]
     public async Task<IActionResult> UpdateProfile([FromBody] UpdateProfileRequest request)
     {
@@ -70,6 +73,7 @@ public class UsersController : ControllerBase
         return Ok(result.Data);
     }
 
+    // Obtiene todos los usuarios (solo administradores)
     [Authorize(Roles = "Administrator")]
     [HttpGet]
     public async Task<IActionResult> GetAllUsers()
@@ -85,6 +89,7 @@ public class UsersController : ControllerBase
         return Ok(result.Data);
     }
 
+    // Elimina un usuario por ID (solo administradores)
     [Authorize(Roles = "Administrator")]
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteUser(Guid id)
@@ -100,6 +105,7 @@ public class UsersController : ControllerBase
         return Ok(new { message = "Usuario eliminado exitosamente" });
     }
 
+    // Actualiza el rol de un usuario (solo administradores)
     [Authorize(Roles = "Administrator")]
     [HttpPut("{id}/role")]
     public async Task<IActionResult> UpdateUserRole(Guid id, [FromBody] UpdateUserRoleRequest request)

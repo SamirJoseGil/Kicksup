@@ -6,10 +6,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace KicksUp.Application.Features.Users.Queries;
 
+// Consulta para obtener todos los usuarios
 public class GetAllUsersQuery : IRequest<Result<List<UserDto>>>
 {
 }
 
+// anejador de la consulta para obtener todos los usuarios
 public class GetAllUsersQueryHandler : IRequestHandler<GetAllUsersQuery, Result<List<UserDto>>>
 {
     private readonly IApplicationDbContext _context;
@@ -19,6 +21,7 @@ public class GetAllUsersQueryHandler : IRequestHandler<GetAllUsersQuery, Result<
         _context = context;
     }
 
+    // Manejador de la consulta para obtener todos los usuarios
     public async Task<Result<List<UserDto>>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
     {
         var users = await _context.Users
@@ -45,6 +48,7 @@ public class GetAllUsersQueryHandler : IRequestHandler<GetAllUsersQuery, Result<
     }
 }
 
+// DTO para representar los datos del usuario   
 public class UserDto
 {
     public Guid Id { get; set; }

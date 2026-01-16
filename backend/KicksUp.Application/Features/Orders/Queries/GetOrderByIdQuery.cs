@@ -5,11 +5,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace KicksUp.Application.Features.Orders.Queries;
 
+// Consulta para obtener una orden de compra por su ID
 public class GetOrderByIdQuery : IRequest<Result<OrderDto>>
 {
     public Guid Id { get; set; }
 }
 
+// Manejador de la consulta para obtener una orden de compra por su ID
 public class GetOrderByIdQueryHandler : IRequestHandler<GetOrderByIdQuery, Result<OrderDto>>
 {
     private readonly IApplicationDbContext _context;
@@ -19,6 +21,7 @@ public class GetOrderByIdQueryHandler : IRequestHandler<GetOrderByIdQuery, Resul
         _context = context;
     }
 
+    // Manejador de la consulta para obtener una orden de compra por su ID
     public async Task<Result<OrderDto>> Handle(GetOrderByIdQuery request, CancellationToken cancellationToken)
     {
         var order = await _context.Orders

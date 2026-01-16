@@ -2,6 +2,8 @@ using KicksUp.Domain.Enums;
 
 namespace KicksUp.Application.Features.Products;
 
+
+// DTO para transferencia de datos de productos
 public class ProductDto
 {
     public Guid Id { get; set; }

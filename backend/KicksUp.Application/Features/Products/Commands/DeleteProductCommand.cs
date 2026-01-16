@@ -5,11 +5,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace KicksUp.Application.Features.Products.Commands;
 
+// Comando para eliminar un producto por su ID
 public class DeleteProductCommand : IRequest<Result<bool>>
 {
     public Guid Id { get; set; }
 }
 
+// Manejador del comando para eliminar un producto
 public class DeleteProductCommandHandler : IRequestHandler<DeleteProductCommand, Result<bool>>
 {
     private readonly IApplicationDbContext _context;
@@ -19,6 +21,7 @@ public class DeleteProductCommandHandler : IRequestHandler<DeleteProductCommand,
         _context = context;
     }
 
+    // Manejador del comando para eliminar un producto
     public async Task<Result<bool>> Handle(DeleteProductCommand request, CancellationToken cancellationToken)
     {
         var product = await _context.Products
@@ -29,7 +32,7 @@ public class DeleteProductCommandHandler : IRequestHandler<DeleteProductCommand,
             return Result<bool>.Failure("Producto no encontrado");
         }
 
-        // Check if product has been ordered
+        // Revisar si el producto está asociado a alguna orden
         var hasOrders = await _context.OrderItems
             .AnyAsync(oi => oi.ProductId == request.Id, cancellationToken);
 

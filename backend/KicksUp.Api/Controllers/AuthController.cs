@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace KicksUp.Api.Controllers;
 
+
+// Controlador para autenticación (login y registro)
 [ApiController]
 [Route("api/[controller]")]
 public class AuthController : ControllerBase
@@ -15,6 +17,8 @@ public class AuthController : ControllerBase
         _mediator = mediator;
     }
 
+    
+    // Registra un nuevo usuario
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] RegisterCommand command)
     {
@@ -28,6 +32,8 @@ public class AuthController : ControllerBase
         return Ok(result.Data);
     }
 
+    
+    // Inicia sesión
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] LoginCommand command)
     {

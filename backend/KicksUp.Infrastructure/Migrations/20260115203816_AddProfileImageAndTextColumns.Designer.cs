@@ -15,7 +15,7 @@ namespace KicksUp.Infrastructure.Migrations
     [Migration("20260115203816_AddProfileImageAndTextColumns")]
     partial class AddProfileImageAndTextColumns
     {
-        /// <inheritdoc />
+        // <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618

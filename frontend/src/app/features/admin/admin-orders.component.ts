@@ -4,6 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { OrderService } from '../../core/services/order.service';
 import { Order, OrderStatus } from '../../core/models';
 
+/**
+ * Componente de administración de órdenes
+ */
 @Component({
   selector: 'app-admin-orders',
   imports: [CommonModule, FormsModule],

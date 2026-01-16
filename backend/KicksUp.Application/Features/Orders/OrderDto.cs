@@ -2,6 +2,8 @@ using KicksUp.Domain.Enums;
 
 namespace KicksUp.Application.Features.Orders;
 
+
+// DTO para transferencia de datos de órdenes
 public class OrderDto
 {
     public Guid Id { get; set; }
@@ -15,6 +17,8 @@ public class OrderDto
     public List<OrderItemDto> Items { get; set; } = new();
 }
 
+
+// DTO para transferencia de datos de ítems de orden
 public class OrderItemDto
 {
     public Guid Id { get; set; }

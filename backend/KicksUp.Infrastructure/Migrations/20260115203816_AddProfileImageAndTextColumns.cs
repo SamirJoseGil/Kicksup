@@ -4,10 +4,10 @@
 
 namespace KicksUp.Infrastructure.Migrations
 {
-    /// <inheritdoc />
+    // <inheritdoc />
     public partial class AddProfileImageAndTextColumns : Migration
     {
-        /// <inheritdoc />
+        // <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<string>(
@@ -27,7 +27,7 @@ namespace KicksUp.Infrastructure.Migrations
                 oldMaxLength: 500);
         }
 
-        /// <inheritdoc />
+        // <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(

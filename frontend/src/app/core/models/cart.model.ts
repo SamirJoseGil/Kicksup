@@ -1,5 +1,6 @@
 import { Product } from './product.model';
 
+// Modelo que representa un ítem en el carrito de compras
 export interface CartItem {
   productId: string;
   productName: string;
@@ -13,6 +14,7 @@ export interface CartItem {
   subtotal: number;
 }
 
+// Modelo que representa el carrito de compras  
 export interface Cart {
   items: CartItem[];
   totalItems: number;

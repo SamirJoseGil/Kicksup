@@ -6,6 +6,9 @@ import { ProductService } from '../../core/services/product.service';
 import { CartService } from '../../core/services/cart.service';
 import { Product, ProductSize, ProductColor } from '../../core/models';
 
+/**
+ * Componente para listar productos con filtros
+ */
 @Component({
   selector: 'app-product-list',
   imports: [CommonModule, FormsModule, RouterLink],

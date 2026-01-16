@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace KicksUp.Infrastructure.Persistence;
 
+// Clase para inicializar datos en la base de datos
 public static class ApplicationDbContextSeed
 {
     public static async Task SeedAsync(ApplicationDbContext context)
@@ -54,7 +55,7 @@ public static class ApplicationDbContextSeed
             await context.SaveChangesAsync();
         }
 
-        // Seed Products
+        // Inicializar productos
         if (!await context.Products.AnyAsync())
         {
             var products = new List<Product>

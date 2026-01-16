@@ -3,6 +3,8 @@ using KicksUp.Domain.Enums;
 
 namespace KicksUp.Domain.Entities;
 
+
+// Entidad que representa un producto (zapato)
 public class Product : BaseEntity
 {
     public string Code { get; set; } = string.Empty;
@@ -14,6 +16,6 @@ public class Product : BaseEntity
     public decimal Price { get; set; }
     public int Stock { get; set; }
     
-    // Navigation properties
+    // Propiedades de navegación
     public ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
 }

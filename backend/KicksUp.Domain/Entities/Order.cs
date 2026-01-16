@@ -3,6 +3,8 @@ using KicksUp.Domain.Enums;
 
 namespace KicksUp.Domain.Entities;
 
+
+// Entidad que representa una orden de compra
 public class Order : BaseEntity
 {
     public Guid UserId { get; set; }
@@ -10,7 +12,7 @@ public class Order : BaseEntity
     public decimal TotalAmount { get; set; }
     public string DeliveryAddress { get; set; } = string.Empty;
     
-    // Navigation properties
+    // Propiedades de navegación
     public User User { get; set; } = null!;
     public ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
 }

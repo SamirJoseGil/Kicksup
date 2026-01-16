@@ -5,6 +5,8 @@ using System.Reflection;
 
 namespace KicksUp.Infrastructure.Persistence;
 
+
+// Contexto de base de datos principal
 public class ApplicationDbContext : DbContext, IApplicationDbContext
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
@@ -21,7 +23,7 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
     {
         base.OnModelCreating(modelBuilder);
         
-        // Apply all configurations from the current assembly
+        // Aplicar todas las configuraciones del ensamblado actual
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
     }
 
@@ -37,6 +39,8 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
         return base.SaveChanges();
     }
 
+    
+    // Actualiza las marcas de tiempo de las entidades
     private void UpdateTimestamps()
     {
         var entries = ChangeTracker.Entries()

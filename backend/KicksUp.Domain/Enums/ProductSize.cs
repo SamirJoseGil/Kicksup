@@ -1,5 +1,7 @@
 namespace KicksUp.Domain.Enums;
 
+
+// Tallas disponibles para productos
 public enum ProductSize
 {
     Size7 = 7,

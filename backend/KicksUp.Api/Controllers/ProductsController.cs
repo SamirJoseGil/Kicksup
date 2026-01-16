@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace KicksUp.Api.Controllers;
 
+
+// Controlador para gestión de productos
 [ApiController]
 [Route("api/[controller]")]
 public class ProductsController : ControllerBase
@@ -19,6 +21,8 @@ public class ProductsController : ControllerBase
         _mediator = mediator;
     }
 
+    
+    // Obtiene todos los productos con filtros opcionales
     [HttpGet]
     public async Task<IActionResult> GetAll(
         [FromQuery] string? searchTerm,
@@ -42,6 +46,8 @@ public class ProductsController : ControllerBase
         return Ok(result.Data);
     }
 
+    
+    // Obtiene un producto por ID
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(Guid id)
     {
@@ -56,6 +62,8 @@ public class ProductsController : ControllerBase
         return Ok(result.Data);
     }
 
+    
+    // Crea un nuevo producto (solo administradores)
     [Authorize(Roles = "Administrator")]
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreateProductCommand command)
@@ -70,6 +78,8 @@ public class ProductsController : ControllerBase
         return CreatedAtAction(nameof(GetById), new { id = result.Data!.Id }, result.Data);
     }
 
+    
+    // Actualiza un producto existente (solo administradores)
     [Authorize(Roles = "Administrator")]
     [HttpPut("{id}")]
     public async Task<IActionResult> Update(Guid id, [FromBody] UpdateProductCommand command)
@@ -85,6 +95,7 @@ public class ProductsController : ControllerBase
         return Ok(result.Data);
     }
 
+    // Elimina un producto (solo administradores)
     [Authorize(Roles = "Administrator")]
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(Guid id)

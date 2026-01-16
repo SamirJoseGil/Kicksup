@@ -6,12 +6,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace KicksUp.Application.Features.Orders.Queries;
 
+// Consulta para obtener todas las órdenes de compra con filtros opcionales
 public class GetAllOrdersQuery : IRequest<Result<List<OrderDto>>>
 {
     public OrderStatus? Status { get; set; }
     public Guid? UserId { get; set; }
 }
 
+// Manejador de la consulta para obtener todas las órdenes de compra
 public class GetAllOrdersQueryHandler : IRequestHandler<GetAllOrdersQuery, Result<List<OrderDto>>>
 {
     private readonly IApplicationDbContext _context;
@@ -21,6 +23,7 @@ public class GetAllOrdersQueryHandler : IRequestHandler<GetAllOrdersQuery, Resul
         _context = context;
     }
 
+    // Manejador de la consulta para obtener todas las órdenes de compra
     public async Task<Result<List<OrderDto>>> Handle(GetAllOrdersQuery request, CancellationToken cancellationToken)
     {
         var query = _context.Orders

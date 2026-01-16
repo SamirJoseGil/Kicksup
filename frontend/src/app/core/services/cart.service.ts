@@ -1,24 +1,31 @@
 import { Injectable, signal, computed } from '@angular/core';
 import { Cart, CartItem, Product } from '../models';
 
+/**
+ * Servicio para manejo del carrito de compras
+ */
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
   private readonly STORAGE_KEY = 'kicksup_cart';
   
+  // Señal de los ítems del carrito
   private readonly cartSignal = signal<CartItem[]>([]);
   
   public readonly items = this.cartSignal.asReadonly();
   
+  // Total de ítems en el carrito
   public readonly totalItems = computed(() => 
     this.cartSignal().reduce((sum, item) => sum + item.quantity, 0)
   );
   
+  // Monto total del carrito
   public readonly totalAmount = computed(() => 
     this.cartSignal().reduce((sum, item) => sum + item.subtotal, 0)
   );
   
+  // Carrito completo
   public readonly cart = computed<Cart>(() => ({
     items: this.cartSignal(),
     totalItems: this.totalItems(),
@@ -29,6 +36,9 @@ export class CartService {
     this.loadCart();
   }
 
+  /**
+   * Carga el carrito desde localStorage
+   */
   private loadCart(): void {
     const cartData = localStorage.getItem(this.STORAGE_KEY);
     if (cartData) {
@@ -42,10 +52,16 @@ export class CartService {
     }
   }
 
+  /**
+   * Guarda el carrito en localStorage
+   */
   private saveCart(): void {
     localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.cartSignal()));
   }
 
+  /**
+   * Agrega un producto al carrito
+   */
   addItem(product: Product, quantity: number = 1): void {
     const currentItems = [...this.cartSignal()];
     const existingIndex = currentItems.findIndex(item => item.productId === product.id);

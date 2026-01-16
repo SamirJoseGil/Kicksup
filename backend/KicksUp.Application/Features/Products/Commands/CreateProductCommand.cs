@@ -7,6 +7,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace KicksUp.Application.Features.Products.Commands;
 
+
+// Comando para crear un nuevo producto
 public class CreateProductCommand : IRequest<Result<ProductDto>>
 {
     public string Code { get; set; } = string.Empty;
@@ -19,6 +21,8 @@ public class CreateProductCommand : IRequest<Result<ProductDto>>
     public int Stock { get; set; }
 }
 
+
+// Manejador del comando de crear producto
 public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, Result<ProductDto>>
 {
     private readonly IApplicationDbContext _context;
@@ -30,7 +34,7 @@ public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand,
 
     public async Task<Result<ProductDto>> Handle(CreateProductCommand request, CancellationToken cancellationToken)
     {
-        // Check if code already exists
+        // Verificar si el código ya existe
         var existingProduct = await _context.Products
             .FirstOrDefaultAsync(p => p.Code == request.Code, cancellationToken);
 

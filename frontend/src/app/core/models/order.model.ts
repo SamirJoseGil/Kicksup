@@ -1,3 +1,4 @@
+// Modelo que representa una orden de compra
 export enum OrderStatus {
   Pending = 1,
   Confirmed = 2,
@@ -6,6 +7,7 @@ export enum OrderStatus {
   Cancelled = 5
 }
 
+// Modelo que representa un ítem dentro de una orden
 export interface OrderItem {
   id: string;
   productId: string;
@@ -22,6 +24,7 @@ export interface OrderItem {
   subtotal: number;
 }
 
+// Modelo que representa una orden de compra
 export interface Order {
   id: string;
   userId: string;
@@ -34,6 +37,7 @@ export interface Order {
   items: OrderItem[];
 }
 
+// Modelo para crear una nueva orden
 export interface CreateOrderRequest {
   items: {
     productId: string;
@@ -41,10 +45,12 @@ export interface CreateOrderRequest {
   }[];
 }
 
+// Modelo para actualizar el estado de una orden
 export interface UpdateOrderStatusRequest {
   status: OrderStatus;
 }
 
+// Modelo para actualizar el estado de una orden
 export interface UpdateOrderStatusRequest {
   status: OrderStatus;
 }

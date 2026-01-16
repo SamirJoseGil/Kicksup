@@ -5,6 +5,9 @@ import { FormsModule } from '@angular/forms';
 import { ProductService } from '../../core/services/product.service';
 import { Product, ProductSize, ProductColor } from '../../core/models';
 
+/**
+ * Componente de administración de productos
+ */
 @Component({
   selector: 'app-admin-products',
   imports: [CommonModule, FormsModule],

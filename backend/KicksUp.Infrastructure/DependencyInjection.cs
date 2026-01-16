@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace KicksUp.Infrastructure;
 
+// Clase para la inyección de dependencias de la capa de infraestructura
 public static class DependencyInjection
 {
     public static IServiceCollection AddInfrastructure(

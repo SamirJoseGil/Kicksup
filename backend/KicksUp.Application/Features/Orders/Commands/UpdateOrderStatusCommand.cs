@@ -6,12 +6,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace KicksUp.Application.Features.Orders.Commands;
 
+// Comando para actualizar el estado de una orden
 public class UpdateOrderStatusCommand : IRequest<Result<OrderDto>>
 {
     public Guid Id { get; set; }
     public OrderStatus Status { get; set; }
 }
 
+// Manejador del comando para actualizar el estado de una orden
 public class UpdateOrderStatusCommandHandler : IRequestHandler<UpdateOrderStatusCommand, Result<OrderDto>>
 {
     private readonly IApplicationDbContext _context;
@@ -21,6 +23,7 @@ public class UpdateOrderStatusCommandHandler : IRequestHandler<UpdateOrderStatus
         _context = context;
     }
 
+    // Manejador del comando para actualizar el estado de una orden
     public async Task<Result<OrderDto>> Handle(UpdateOrderStatusCommand request, CancellationToken cancellationToken)
     {
         var order = await _context.Orders

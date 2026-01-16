@@ -7,6 +7,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace KicksUp.Application.Features.Authentication.Commands;
 
+
+// Comando para registrar un nuevo usuario
 public class RegisterCommand : IRequest<Result<AuthenticationResponse>>
 {
     public string FirstName { get; set; } = string.Empty;
@@ -23,6 +25,8 @@ public class RegisterCommand : IRequest<Result<AuthenticationResponse>>
     public UserRole Role { get; set; } = UserRole.Client;
 }
 
+
+// Manejador del comando de registro
 public class RegisterCommandHandler : IRequestHandler<RegisterCommand, Result<AuthenticationResponse>>
 {
     private readonly IApplicationDbContext _context;
@@ -36,7 +40,7 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, Result<Au
 
     public async Task<Result<AuthenticationResponse>> Handle(RegisterCommand request, CancellationToken cancellationToken)
     {
-        // Check if username already exists
+        // Verificar si el nombre de usuario ya existe
         var existingUser = await _context.Users
             .FirstOrDefaultAsync(u => u.Username == request.Username, cancellationToken);
 
@@ -45,10 +49,10 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, Result<Au
             return Result<AuthenticationResponse>.Failure("El nombre de usuario ya existe");
         }
 
-        // Hash password
+        // Hashear la contraseña
         var passwordHash = BCrypt.Net.BCrypt.HashPassword(request.Password);
 
-        // Create user
+        // Crear usuario
         var user = new User
         {
             FirstName = request.FirstName,
@@ -69,7 +73,7 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, Result<Au
         _context.Users.Add(user);
         await _context.SaveChangesAsync(cancellationToken);
 
-        // Generate token
+        // Generar token JWT
         var token = _tokenService.GenerateToken(user.Id, user.Username, user.Role.ToString());
 
         return Result<AuthenticationResponse>.Success(new AuthenticationResponse
@@ -82,6 +86,8 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, Result<Au
     }
 }
 
+
+// Respuesta de autenticación (login/registro)
 public class AuthenticationResponse
 {
     public string Token { get; set; } = string.Empty;

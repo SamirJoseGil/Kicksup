@@ -6,12 +6,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace KicksUp.Application.Features.Authentication.Commands;
 
+
+// Comando para iniciar sesión en el sistema
 public class LoginCommand : IRequest<Result<AuthenticationResponse>>
 {
     public string Username { get; set; } = string.Empty;
     public string Password { get; set; } = string.Empty;
 }
 
+
+// Manejador del comando de login
 public class LoginCommandHandler : IRequestHandler<LoginCommand, Result<AuthenticationResponse>>
 {
     private readonly IApplicationDbContext _context;
@@ -25,7 +29,7 @@ public class LoginCommandHandler : IRequestHandler<LoginCommand, Result<Authenti
 
     public async Task<Result<AuthenticationResponse>> Handle(LoginCommand request, CancellationToken cancellationToken)
     {
-        // Find user
+        // Buscar usuario
         var user = await _context.Users
             .FirstOrDefaultAsync(u => u.Username == request.Username, cancellationToken);
 
@@ -34,14 +38,14 @@ public class LoginCommandHandler : IRequestHandler<LoginCommand, Result<Authenti
             return Result<AuthenticationResponse>.Failure("Usuario o contraseña incorrectos");
         }
 
-        // Verify password
+        // Verificar contraseña
         var isValidPassword = BCrypt.Net.BCrypt.Verify(request.Password, user.PasswordHash);
         if (!isValidPassword)
         {
             return Result<AuthenticationResponse>.Failure("Usuario o contraseña incorrectos");
         }
 
-        // Generate token
+        // Generar token JWT
         var token = _tokenService.GenerateToken(user.Id, user.Username, user.Role.ToString());
 
         return Result<AuthenticationResponse>.Success(new AuthenticationResponse

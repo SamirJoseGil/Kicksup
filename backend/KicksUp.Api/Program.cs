@@ -9,9 +9,11 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container
+// Agregar servicios al contenedor
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
+
+// Configurar Swagger
 builder.Services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc("v1", new OpenApiInfo
@@ -21,7 +23,7 @@ builder.Services.AddSwaggerGen(options =>
         Description = "API para el sistema de e-commerce de tenis deportivos"
     });
 
-    // Add JWT Authentication to Swagger
+    // Agregar autenticación JWT a Swagger
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Description = "JWT Authorization header usando el esquema Bearer. Ejemplo: \"Bearer {token}\"",
@@ -47,7 +49,7 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 
-// Add CORS
+// Configurar CORS
 var corsOrigins = builder.Configuration["CorsSettings:AllowedOrigins"]?.Split(',') 
     ?? new[] { "http://localhost:4200" };
 
@@ -62,7 +64,7 @@ builder.Services.AddCors(options =>
     });
 });
 
-// Add JWT Authentication
+// Configurar autenticación JWT
 var jwtSettings = builder.Configuration.GetSection("JwtSettings");
 var secret = jwtSettings["Secret"] ?? throw new InvalidOperationException("JWT Secret not configured");
 
@@ -87,7 +89,7 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddAuthorization();
 
-// Add Application and Infrastructure layers
+// Agregar capas de Application e Infrastructure
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
 
@@ -146,7 +148,7 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
-// Configure the HTTP request pipeline
+// Configurar el pipeline de la aplicación HTTP
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -158,7 +160,7 @@ if (app.Environment.IsDevelopment())
 }
 else
 {
-    // Enable Swagger in production too (optional, can be removed for security)
+    // Activar Swagger también en producción para propósitos de prueba
     app.UseSwagger();
     app.UseSwaggerUI(c =>
     {

@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace KicksUp.Infrastructure.Migrations
 {
-    /// <inheritdoc />
+    // <inheritdoc />
     public partial class Initial : Migration
     {
-        /// <inheritdoc />
+        // <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -138,7 +138,7 @@ namespace KicksUp.Infrastructure.Migrations
                 unique: true);
         }
 
-        /// <inheritdoc />
+        // <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(

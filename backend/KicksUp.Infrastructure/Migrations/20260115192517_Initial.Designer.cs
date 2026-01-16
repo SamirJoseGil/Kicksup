@@ -15,7 +15,7 @@ namespace KicksUp.Infrastructure.Migrations
     [Migration("20260115192517_Initial")]
     partial class Initial
     {
-        /// <inheritdoc />
+        // <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618

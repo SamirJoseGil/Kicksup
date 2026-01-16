@@ -7,6 +7,8 @@ using System.Text;
 
 namespace KicksUp.Infrastructure.Services;
 
+
+// Servicio para generar tokens JWT
 public class TokenService : ITokenService
 {
     private readonly IConfiguration _configuration;
@@ -16,6 +18,8 @@ public class TokenService : ITokenService
         _configuration = configuration;
     }
 
+    
+    // Genera un token JWT para el usuario
     public string GenerateToken(Guid userId, string username, string role)
     {
         var jwtSettings = _configuration.GetSection("JwtSettings");
@@ -27,6 +31,7 @@ public class TokenService : ITokenService
         var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret));
         var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
+        // Claims del token
         var claims = new[]
         {
             new Claim(JwtRegisteredClaimNames.Sub, userId.ToString()),

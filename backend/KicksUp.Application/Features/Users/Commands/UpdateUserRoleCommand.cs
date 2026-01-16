@@ -6,12 +6,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace KicksUp.Application.Features.Users.Commands;
 
+// Comando para actualizar el rol de un usuario
 public class UpdateUserRoleCommand : IRequest<Result<bool>>
 {
     public Guid UserId { get; set; }
     public UserRole Role { get; set; }
 }
 
+// Manejador del comando para actualizar el rol de un usuario
 public class UpdateUserRoleCommandHandler : IRequestHandler<UpdateUserRoleCommand, Result<bool>>
 {
     private readonly IApplicationDbContext _context;
@@ -21,6 +23,7 @@ public class UpdateUserRoleCommandHandler : IRequestHandler<UpdateUserRoleComman
         _context = context;
     }
 
+    // Manejador del comando para actualizar el rol de un usuario
     public async Task<Result<bool>> Handle(UpdateUserRoleCommand request, CancellationToken cancellationToken)
     {
         var user = await _context.Users

@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace KicksUp.Application.Features.Products.Queries;
 
+
+// Query para obtener todos los productos con filtros opcionales
 public class GetAllProductsQuery : IRequest<Result<List<ProductDto>>>
 {
     public string? SearchTerm { get; set; }
@@ -13,6 +15,8 @@ public class GetAllProductsQuery : IRequest<Result<List<ProductDto>>>
     public ProductColor? Color { get; set; }
 }
 
+
+// Manejador del query para obtener productos
 public class GetAllProductsQueryHandler : IRequestHandler<GetAllProductsQuery, Result<List<ProductDto>>>
 {
     private readonly IApplicationDbContext _context;
@@ -26,7 +30,7 @@ public class GetAllProductsQueryHandler : IRequestHandler<GetAllProductsQuery, R
     {
         var query = _context.Products.AsQueryable();
 
-        // Apply filters
+        // Aplicar filtros
         if (!string.IsNullOrWhiteSpace(request.SearchTerm))
         {
             var searchTerm = request.SearchTerm.ToLower();

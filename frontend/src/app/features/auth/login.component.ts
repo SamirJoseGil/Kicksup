@@ -5,6 +5,9 @@ import { AuthService } from '../../core/services/auth.service';
 import { UserRole } from '../../core/models';
 import { CommonModule } from '@angular/common';
 
+/**
+ * Componente de inicio de sesión
+ */
 @Component({
   selector: 'app-login',
   imports: [CommonModule, ReactiveFormsModule, RouterLink],

@@ -6,6 +6,9 @@ import { FooterComponent } from './shared/components/footer.component';
 import { filter, map } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
 
+/**
+ * Componente raíz de la aplicación
+ */
 @Component({
   selector: 'app-root',
   imports: [CommonModule, RouterOutlet, NavbarComponent, FooterComponent],
@@ -15,6 +18,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 export class App {
   private readonly router = inject(Router);
   
+  // Señal de la URL actual
   private readonly currentUrl = toSignal(
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd),
@@ -23,6 +27,7 @@ export class App {
     { initialValue: this.router.url }
   );
 
+  // Verifica si la ruta actual es del panel de administración
   protected readonly isAdminRoute = computed(() => {
     const url = this.currentUrl();
     return url?.startsWith('/admin') ?? false;

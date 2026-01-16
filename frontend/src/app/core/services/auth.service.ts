@@ -5,6 +5,9 @@ import { AuthResponse, LoginRequest, RegisterRequest, UserRole } from '../models
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 
+/**
+ * Servicio para manejo de autenticación
+ */
 @Injectable({
   providedIn: 'root'
 })
@@ -13,6 +16,7 @@ export class AuthService {
   private readonly router = inject(Router);
   private readonly apiUrl = environment.apiUrl;
 
+  // Señal del usuario actual
   private readonly currentUserSignal = signal<AuthResponse | null>(null);
   public readonly currentUser = this.currentUserSignal.asReadonly();
 
@@ -20,6 +24,9 @@ export class AuthService {
     this.loadUserFromStorage();
   }
 
+  /**
+   * Carga el usuario desde localStorage
+   */
   private loadUserFromStorage(): void {
     const userStr = localStorage.getItem('currentUser');
     if (userStr) {
@@ -33,6 +40,9 @@ export class AuthService {
     }
   }
 
+  /**
+   * Inicia sesión
+   */
   login(request: LoginRequest): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.apiUrl}/auth/login`, request).pipe(
       tap(response => {
@@ -41,6 +51,9 @@ export class AuthService {
     );
   }
 
+  /**
+   * Registra un nuevo usuario
+   */
   register(request: RegisterRequest): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.apiUrl}/auth/register`, request).pipe(
       tap(response => {
@@ -49,6 +62,9 @@ export class AuthService {
     );
   }
 
+  /**
+   * Guarda los datos de autenticación
+   */
   private setAuthData(response: AuthResponse): void {
     console.log('🔐 Auth Response:', response);
     console.log('🔐 Role value:', response.role);

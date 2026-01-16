@@ -5,11 +5,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace KicksUp.Application.Features.Orders.Commands;
 
+// Comando para eliminar una orden de compra
 public class DeleteOrderCommand : IRequest<Result<bool>>
 {
     public Guid Id { get; set; }
 }
 
+// Manejador del comando para eliminar una orden
 public class DeleteOrderCommandHandler : IRequestHandler<DeleteOrderCommand, Result<bool>>
 {
     private readonly IApplicationDbContext _context;
@@ -19,6 +21,7 @@ public class DeleteOrderCommandHandler : IRequestHandler<DeleteOrderCommand, Res
         _context = context;
     }
 
+    // Manejador del comando para eliminar una orden
     public async Task<Result<bool>> Handle(DeleteOrderCommand request, CancellationToken cancellationToken)
     {
         var order = await _context.Orders

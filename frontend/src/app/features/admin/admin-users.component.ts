@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { UserService, User } from '../../core/services/user.service';
 
+/**
+ * Componente de administración de usuarios
+ */
 @Component({
   selector: 'app-admin-users',
   imports: [CommonModule, FormsModule],

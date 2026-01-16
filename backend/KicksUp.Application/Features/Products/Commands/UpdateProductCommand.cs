@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace KicksUp.Application.Features.Products.Commands;
 
+// Comando para actualizar un producto existente
 public class UpdateProductCommand : IRequest<Result<ProductDto>>
 {
     public Guid Id { get; set; }
@@ -19,6 +20,7 @@ public class UpdateProductCommand : IRequest<Result<ProductDto>>
     public int Stock { get; set; }
 }
 
+// Manejador del comando para actualizar un producto
 public class UpdateProductCommandHandler : IRequestHandler<UpdateProductCommand, Result<ProductDto>>
 {
     private readonly IApplicationDbContext _context;
@@ -28,6 +30,7 @@ public class UpdateProductCommandHandler : IRequestHandler<UpdateProductCommand,
         _context = context;
     }
 
+    // Manejador del comando para actualizar un producto
     public async Task<Result<ProductDto>> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
     {
         var product = await _context.Products
@@ -38,7 +41,7 @@ public class UpdateProductCommandHandler : IRequestHandler<UpdateProductCommand,
             return Result<ProductDto>.Failure("Producto no encontrado");
         }
 
-        // Check if code already exists on another product
+        // Revisar si el código ya existe en otro producto
         var existingProduct = await _context.Products
             .FirstOrDefaultAsync(p => p.Code == request.Code && p.Id != request.Id, cancellationToken);
 

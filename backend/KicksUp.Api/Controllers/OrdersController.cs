@@ -8,6 +8,7 @@ using System.Security.Claims;
 
 namespace KicksUp.Api.Controllers;
 
+// Controlador para gestión de órdenes
 [Authorize]
 [ApiController]
 [Route("api/[controller]")]
@@ -20,6 +21,7 @@ public class OrdersController : ControllerBase
         _mediator = mediator;
     }
 
+    // Obtiene todas las órdenes con filtros opcionales
     [HttpGet]
     public async Task<IActionResult> GetAll([FromQuery] OrderStatus? status)
     {
@@ -47,6 +49,7 @@ public class OrdersController : ControllerBase
         return Ok(result.Data);
     }
 
+    // Obtiene una orden por ID
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(Guid id)
     {
@@ -58,7 +61,6 @@ public class OrdersController : ControllerBase
             return NotFound(new { error = result.ErrorMessage });
         }
 
-        // Check if user has access to this order
         var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
         var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
@@ -70,6 +72,7 @@ public class OrdersController : ControllerBase
         return Ok(result.Data);
     }
 
+    // Crea una nueva orden
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreateOrderCommand command)
     {
@@ -91,6 +94,7 @@ public class OrdersController : ControllerBase
         return CreatedAtAction(nameof(GetById), new { id = result.Data!.Id }, result.Data);
     }
 
+    // Actualiza el estado de una orden (solo administradores)
     [Authorize(Roles = "Administrator")]
     [HttpPatch("{id}/status")]
     public async Task<IActionResult> UpdateStatus(Guid id, [FromBody] UpdateOrderStatusRequest request)
@@ -111,6 +115,7 @@ public class OrdersController : ControllerBase
         return Ok(result.Data);
     }
 
+    // Elimina una orden (solo administradores)
     [Authorize(Roles = "Administrator")]
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(Guid id)

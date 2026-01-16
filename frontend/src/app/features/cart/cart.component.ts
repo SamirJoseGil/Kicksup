@@ -4,6 +4,9 @@ import { Router, RouterLink } from '@angular/router';
 import { CartService } from '../../core/services/cart.service';
 import { AuthService } from '../../core/services/auth.service';
 
+/**
+ * Componente del carrito de compras
+ */
 @Component({
   selector: 'app-cart',
   imports: [CommonModule, RouterLink],

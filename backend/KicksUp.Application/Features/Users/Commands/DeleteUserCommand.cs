@@ -5,11 +5,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace KicksUp.Application.Features.Users.Commands;
 
+// Comando para eliminar un usuario por su ID
 public class DeleteUserCommand : IRequest<Result<bool>>
 {
     public Guid Id { get; set; }
 }
 
+// Manejador del comando para eliminar un usuario
 public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand, Result<bool>>
 {
     private readonly IApplicationDbContext _context;

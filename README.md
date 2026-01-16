@@ -107,7 +107,7 @@ kicksup/
 ### 1️⃣ Clonar el Repositorio
 
 ```bash
-git clone https://github.com/your-username/kicksup.git
+git clone https://github.com/samirjosegil/kicksup.git
 cd kicksup
 ```
 
@@ -169,41 +169,11 @@ Contraseña: Client123!
 
 ---
 
-## 🐳 Despliegue con Docker
-
-### Opción Rápida (Docker Compose)
-
-```bash
-# 1. Copiar archivo de variables de entorno
-cp .env.example .env
-
-# 2. Editar .env con tus configuraciones
-nano .env  # o usa tu editor favorito
-
-# 3. Construir y ejecutar todos los servicios
-docker-compose up -d
-
-# 4. Ver logs (opcional)
-docker-compose logs -f
-```
-
 **Servicios disponibles**:
 - 🌐 Frontend: `http://localhost`
 - 🔌 Backend API: `http://localhost:5047`
 - 📘 Swagger: `http://localhost:5047/swagger`
 - 🗄️ PostgreSQL: `localhost:5432`
-
-### Scripts de Deployment
-
-```bash
-# PowerShell (Windows)
-.\deploy.ps1 -Environment production -Docker
-
-# Bash (Linux/Mac)
-./deploy.sh --environment production --docker
-```
-
-Para instrucciones detalladas de deployment en Azure, AWS, Netlify o Vercel, consulta [DEPLOYMENT.md](DEPLOYMENT.md).
 
 ---
 
@@ -213,12 +183,8 @@ Para instrucciones detalladas de deployment en Azure, AWS, Netlify o Vercel, con
 |-----------|-------------|
 | [📖 API.md](API.md) | Documentación completa de la API REST con ejemplos |
 | [🏗️ ARCHITECTURE.md](ARCHITECTURE.md) | Arquitectura del sistema, patrones y flujos de datos |
-| [🚀 DEPLOYMENT.md](DEPLOYMENT.md) | Guía detallada de deployment en producción |
 | [📝 CHANGELOG.md](CHANGELOG.md) | Historial de cambios y versiones |
-| [🤝 CONTRIBUTING.md](CONTRIBUTING.md) | Guía para contribuir al proyecto |
 | [🔒 SECURITY.md](SECURITY.md) | Políticas de seguridad y reportes de vulnerabilidades |
-| [📜 CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) | Código de conducta para contribuyentes |
-| [🗺️ roadmap.md](roadmap.md) | Roadmap del proyecto y fases de desarrollo |
 | [📘 Swagger UI](http://localhost:5047/swagger) | Documentación interactiva de la API (servidor activo) |
 
 ---
@@ -352,8 +318,7 @@ Si descubres una vulnerabilidad de seguridad, por favor sigue nuestra [Política
 
 ### Contacto
 
-- GitHub: [@your-username](https://github.com/your-username)
-- LinkedIn: [Tu perfil](https://linkedin.com/in/your-profile)
+- GitHub: [@samirjosegil](https://github.com/samirjosegil)
 
 ---
 
@@ -369,7 +334,7 @@ Si descubres una vulnerabilidad de seguridad, por favor sigue nuestra [Política
 
 **⭐ Si este proyecto te resultó útil, considera darle una estrella ⭐**
 
-[![GitHub stars](https://img.shields.io/github/stars/your-username/kicksup?style=social)](https://github.com/your-username/kicksup/stargazers)
+[![GitHub stars](https://img.shields.io/github/stars/samirjosegil/kicksup?style=social)](https://github.com/samirjosegil/kicksup/stargazers)
 
 **Hecho con ❤️ usando .NET 9.0 y Angular 18**
 

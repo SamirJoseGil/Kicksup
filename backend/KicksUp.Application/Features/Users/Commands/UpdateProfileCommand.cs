@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace KicksUp.Application.Features.Users.Commands;
 
+// Comando para actualizar el perfil de un usuario
 public class UpdateProfileCommand : IRequest<Result<UserProfileDto>>
 {
     public Guid UserId { get; set; }
@@ -14,6 +15,7 @@ public class UpdateProfileCommand : IRequest<Result<UserProfileDto>>
     public string? ProfileImageUrl { get; set; }
 }
 
+// DTO para el perfil de usuario
 public class UserProfileDto
 {
     public Guid Id { get; set; }
@@ -24,6 +26,7 @@ public class UserProfileDto
     public string ProfileImageUrl { get; set; } = string.Empty;
 }
 
+// Manejador del comando para actualizar el perfil de un usuario
 public class UpdateProfileCommandHandler : IRequestHandler<UpdateProfileCommand, Result<UserProfileDto>>
 {
     private readonly IApplicationDbContext _context;
@@ -33,6 +36,7 @@ public class UpdateProfileCommandHandler : IRequestHandler<UpdateProfileCommand,
         _context = context;
     }
 
+    // Manejador del comando para actualizar el perfil de un usuario
     public async Task<Result<UserProfileDto>> Handle(UpdateProfileCommand request, CancellationToken cancellationToken)
     {
         var user = await _context.Users
@@ -43,7 +47,7 @@ public class UpdateProfileCommandHandler : IRequestHandler<UpdateProfileCommand,
             return Result<UserProfileDto>.Failure("Usuario no encontrado");
         }
 
-        // Parse full name into first and last name
+        // Actualizar los campos del perfil si se proporcionan
         if (!string.IsNullOrEmpty(request.FullName))
         {
             var nameParts = request.FullName.Trim().Split(' ', 2);

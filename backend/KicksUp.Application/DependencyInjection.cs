@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace KicksUp.Application;
 
+// Configuración de inyección de dependencias para la capa de aplicación
 public static class DependencyInjection
 {
     public static IServiceCollection AddApplication(this IServiceCollection services)

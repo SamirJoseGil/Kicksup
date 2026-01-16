@@ -1,8 +1,10 @@
 namespace KicksUp.Domain.Enums;
 
+
+// Colores disponibles para productos
 public enum ProductColor
 {
-    White = 1,
-    Black = 2,
-    Gray = 3
+    White = 1,  // Blanco
+    Black = 2,  // Negro
+    Gray = 3    // Gris
 }

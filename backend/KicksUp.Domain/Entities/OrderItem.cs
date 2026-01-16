@@ -2,6 +2,8 @@ using KicksUp.Domain.Common;
 
 namespace KicksUp.Domain.Entities;
 
+
+// Entidad que representa un ítem dentro de una orden
 public class OrderItem : BaseEntity
 {
     public Guid OrderId { get; set; }
@@ -10,7 +12,7 @@ public class OrderItem : BaseEntity
     public decimal UnitPrice { get; set; }
     public decimal Subtotal { get; set; }
     
-    // Navigation properties
+    // Propiedades de navegación
     public Order Order { get; set; } = null!;
     public Product Product { get; set; } = null!;
 }
