@@ -1,0 +1,366 @@
+@use 'sass:color';
+
+// Container principal
+.dashboard-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0;
+  animation: fadeIn 0.6s ease-out;
+
+  h1 {
+    font-size: 2.8rem;
+    font-weight: 800;
+    margin-bottom: 2rem;
+    background: linear-gradient(135deg, #ffffff 0%, #e10600 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+// Grid de estadísticas
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+
+  .stat-card {
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-radius: 12px;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    animation: slideIn 0.4s ease-out;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(225, 6, 0, 0.05), rgba(255, 106, 0, 0.05));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    &:hover {
+      transform: translateY(-4px);
+      border-color: #e10600;
+      box-shadow: 0 10px 30px rgba(225, 6, 0, 0.2);
+
+      &::before {
+        opacity: 1;
+      }
+
+      .stat-icon {
+        transform: scale(1.1) rotate(5deg);
+        background: linear-gradient(135deg, rgba(225, 6, 0, 0.2), rgba(225, 6, 0, 0.3));
+      }
+    }
+
+    .stat-icon {
+      width: 60px;
+      height: 60px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, rgba(225, 6, 0, 0.1), rgba(225, 6, 0, 0.2));
+      border-radius: 12px;
+      color: #e10600;
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 1;
+
+      svg {
+        width: 32px;
+        height: 32px;
+      }
+    }
+
+    .stat-info {
+      flex: 1;
+      position: relative;
+      z-index: 1;
+
+      h3 {
+        font-size: 2.2rem;
+        font-weight: 800;
+        color: #ffffff;
+        margin: 0 0 0.25rem 0;
+        line-height: 1;
+      }
+
+      p {
+        color: #9ca3af;
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin: 0;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+    }
+  }
+}
+
+// Acciones rápidas
+.quick-actions {
+  margin-bottom: 3rem;
+
+  h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: #ffffff;
+  }
+
+  .actions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+
+    .action-card {
+      background: linear-gradient(135deg, rgba(225, 6, 0, 0.15), rgba(255, 106, 0, 0.1));
+      border: 1px solid #2a2a2a;
+      border-radius: 12px;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      overflow: hidden;
+      animation: slideIn 0.5s ease-out;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+        transition: left 0.5s ease;
+      }
+
+      &:hover {
+        transform: translateY(-8px) scale(1.02);
+        border-color: #e10600;
+        box-shadow: 0 20px 50px rgba(225, 6, 0, 0.3);
+
+        &::before {
+          left: 100%;
+        }
+
+        .action-icon {
+          transform: scale(1.15) rotate(5deg);
+          background: linear-gradient(135deg, rgba(225, 6, 0, 0.3), rgba(225, 6, 0, 0.4));
+        }
+      }
+
+      .action-icon {
+        width: 60px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, rgba(225, 6, 0, 0.2), rgba(225, 6, 0, 0.3));
+        border-radius: 12px;
+        color: #e10600;
+        margin: 0 auto 1.25rem auto;
+        transition: all 0.4s ease;
+
+        svg {
+          width: 32px;
+          height: 32px;
+        }
+      }
+
+      h3 {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: #ffffff;
+        margin-bottom: 0.75rem;
+      }
+
+      p {
+        color: #9ca3af;
+        font-size: 0.95rem;
+        font-weight: 500;
+        margin: 0;
+      }
+    }
+  }
+}
+
+// Alertas de stock bajo
+.alerts-section {
+  h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    
+    svg {
+      color: #f59e0b;
+      flex-shrink: 0;
+    }
+  }
+
+  .alert-list {
+    display: grid;
+    gap: 1rem;
+
+    .alert-item {
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      border-radius: 12px;
+      padding: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      transition: all 0.3s ease;
+      animation: pulse 2s ease-in-out infinite;
+
+      &:hover {
+        transform: translateY(-2px);
+        border-color: #f59e0b;
+        box-shadow: 0 10px 30px rgba(245, 158, 11, 0.2);
+        animation: none;
+      }
+
+      .alert-content {
+        flex: 1;
+
+        h4 {
+          font-size: 1.1rem;
+          font-weight: 700;
+          color: #ffffff;
+          margin: 0 0 0.5rem 0;
+        }
+
+        p {
+          color: #9ca3af;
+          font-size: 0.9rem;
+          margin: 0;
+
+          strong {
+            color: #f59e0b;
+            font-weight: 800;
+          }
+        }
+      }
+
+      .btn-view {
+        padding: 0.75rem 1.5rem;
+        background: rgba(225, 6, 0, 0.2);
+        border: 1px solid #e10600;
+        border-radius: 8px;
+        color: #e10600;
+        font-weight: 700;
+        font-size: 0.9rem;
+        text-decoration: none;
+        white-space: nowrap;
+        transition: all 0.3s ease;
+
+        &:hover {
+          background: #e10600;
+          color: #ffffff;
+          transform: translateX(4px);
+        }
+      }
+    }
+  }
+}
+
+// Animaciones
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .dashboard-container {
+    h1 {
+      font-size: 2rem;
+    }
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+
+    .stat-card {
+      padding: 1.5rem;
+
+      .stat-icon {
+        width: 50px;
+        height: 50px;
+
+        svg {
+          width: 26px;
+          height: 26px;
+        }
+      }
+
+      .stat-info h3 {
+        font-size: 1.8rem;
+      }
+    }
+  }
+
+  .quick-actions {
+    .actions-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .alerts-section {
+    .alert-list .alert-item {
+      flex-direction: column;
+      text-align: center;
+
+      .btn-view {
+        width: 100%;
+      }
+    }
+  }
+}

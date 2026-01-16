@@ -1,0 +1,17 @@
+main {
+  padding: 4rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+
+  &.admin-view {
+    padding: 0;
+    max-width: none;
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+  }
+}

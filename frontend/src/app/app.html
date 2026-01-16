@@ -1,0 +1,9 @@
+@if (!isAdminRoute()) {
+  <app-navbar />
+}
+<main [class.admin-view]="isAdminRoute()">
+  <router-outlet />
+</main>
+@if (!isAdminRoute()) {
+  <app-footer />
+}
