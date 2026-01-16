@@ -1,0 +1,45 @@
+# Environment Variables
+.env
+.env.local
+.env.*.local
+*.env
+
+# Backend
+backend/.env
+backend/.env.*
+backend/**/bin/
+backend/**/obj/
+backend/**/*.user
+backend/**/*.suo
+backend/**/*.userprefs
+backend/**/appsettings.*.local.json
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.angular/
+frontend/.env
+frontend/.env.*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+*.log
+logs/
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Build outputs
+publish/
+*.dll
+*.exe
+*.pdb
